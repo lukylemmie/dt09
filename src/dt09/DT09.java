@@ -26,6 +26,10 @@ public class DT09 {
         }
     }
     
+    public DT09(ArrayList<String> wordList){
+        words = wordList;
+    }
+    
     public void rearrangeLetters(){
         char[] charArray;
         ArrayList<String> words2 = new ArrayList<String>();
@@ -212,11 +216,21 @@ public class DT09 {
         long startTime = System.currentTimeMillis();
         long endTime;
         long time;
+        ArrayList<String> wordList = null;
         ArrayList<Puzzle> puzzles;
         ArrayList<String> nineLetters;
 
-        System.out.println("Starting rearrange");
-        dt09.rearrangeLetters();
+        System.out.println("Get + rearrange + sort wordList");
+        try {
+            wordList = TextFileReader.OpenFileRearrangeSort("wordList.txt");
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+//        System.out.println("Starting rearrange");
+//        dt09.rearrangeLetters();
+        if(wordList != null){
+            dt09 = new DT09(wordList);
+        }
         System.out.println("Compulsory categorising");
         dt09.handleCompulsoryLetter();
         nineLetters = dt09.getAllNineLetter();
