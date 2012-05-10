@@ -73,20 +73,66 @@ public class DT09 {
         }
     }
     
-    public String findHighestWord(ArrayList<String> aCat){
+    public StringNScore findHighestWord(int cat){
+        StringNScore stringNScore;
         Hashtable<String, Integer> scores = new Hashtable<String, Integer>();
-
         String highestWord = "";
+        ArrayList<String> nineLetterWords = new ArrayList<String>();
+        Integer score;
+        ArrayList<String> aCat = letterCats.get(cat);
 
         //collect all the 9 letter words into an arraylist
-
         //put the 9 letter words into the hash table with Integer = 0 values
+        for(String word : aCat){
+            if(word.length() == 9){
+                nineLetterWords.add(word);
+                score = new Integer(0);
+                scores.put(word, score);
+            }
+        }
 
         //use wordContains to check if other words are in that word
-
-        //find the largest score and return that word
+        for(String wordInCat : aCat){
+            for(String nineWord : nineLetterWords){
+                if(wordContains(nineWord, wordInCat)){
+                    score = scores.get(nineWord);
+                    score++;
+                }
+            }
+        }
         
-        return highestWord;
+        //find the largest score and return that word
+        highestWord = nineLetterWords.get(0);
+        for(String word : nineLetterWords){
+            if(scores.get(word) > scores.get(highestWord)){
+                highestWord = word;
+            }
+        }
+
+        stringNScore = new StringNScore(highestWord, scores.get(highestWord), cat);
+        
+        return stringNScore;
+    }
+    
+    public StringNScore findHighestOverall(){
+        ArrayList<StringNScore> highestWords = new ArrayList<StringNScore>();
+        StringNScore highestScore;
+        int i = 0;
+
+        for(ArrayList<String> cat : letterCats){
+            System.out.println("Searching through cat:" + i);
+            highestWords.add(findHighestWord(i));
+            i++;
+        }
+
+        highestScore = highestWords.get(0);
+        for(StringNScore stringNScore : highestWords){
+            if(stringNScore.getScore() > highestScore.getScore()){
+                highestScore = stringNScore;
+            }
+        }
+        
+        return highestScore;
     }
     
     public boolean wordContains(String word, String substring){
@@ -104,16 +150,37 @@ public class DT09 {
         }
         return doesContain;
     }
+
+    public ArrayList<String> getNineLetterWords(ArrayList<String> list){
+        ArrayList<String> nineLetterWords = new ArrayList<String>();
+
+        for(String word : list){
+            if(word.length() == 9){
+                nineLetterWords.add(word);
+            }
+        }
+
+        return nineLetterWords;
+    }
+
+    public ArrayList<String> getAllNineLetter(){
+        return getNineLetterWords(words);
+    }
     
     public static void main(String[] args){
         DT09 dt09 = new DT09();
         long startTime = System.currentTimeMillis();
         long endTime;
         long time;
+        StringNScore highest;
+        ArrayList<String> nineLetters;
 
+        System.out.println("Starting rearrange");
         dt09.rearrangeLetters();
+        System.out.println("Compulsory categorising");
         dt09.handleCompulsoryLetter();
-        dt09.printACat(25);
+        nineLetters = dt09.getAllNineLetter();
+        
         endTime = System.currentTimeMillis();
         time = endTime - startTime;
 
