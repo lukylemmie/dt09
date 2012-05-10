@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Hashtable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,8 +74,17 @@ public class DT09 {
     }
     
     public String findHighestWord(ArrayList<String> aCat){
+        Hashtable<String, Integer> scores = new Hashtable<String, Integer>();
 
         String highestWord = "";
+
+        //collect all the 9 letter words into an arraylist
+
+        //put the 9 letter words into the hash table with Integer = 0 values
+
+        //use wordContains to check if other words are in that word
+
+        //find the largest score and return that word
         
         return highestWord;
     }

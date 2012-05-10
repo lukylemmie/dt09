@@ -8,5 +8,9 @@ package dt09;
  * To change this template use File | Settings | File Templates.
  */
 public class TestWordContains {
-
+    public static void main(String[] args){
+        DT09 dt09 = new DT09();
+        
+        System.out.println(dt09.wordContains("aalltb", "altb"));
+    }
 }
