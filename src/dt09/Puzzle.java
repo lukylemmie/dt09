@@ -7,12 +7,12 @@ package dt09;
  * Time: 8:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class StringNScore {
+public class Puzzle {
     private final String string;
     private final Integer score;
     private final int cat;
     
-    public StringNScore(String string, Integer score, int cat){
+    public Puzzle(String string, Integer score, int cat){
         this.string = string;
         this.score = score;
         this.cat = cat;
@@ -24,5 +24,9 @@ public class StringNScore {
 
     public Integer getScore() {
         return score;
+    }
+
+    public int getCat() {
+        return cat;
     }
 }

@@ -12,5 +12,7 @@ public class TestWordContains {
         DT09 dt09 = new DT09();
         
         System.out.println(dt09.wordContains("aalltb", "altb"));
+        System.out.println(dt09.wordContains("aalltb", "altbsd"));
+        System.out.println(dt09.wordContains("sdfasdf", "ff"));
     }
 }

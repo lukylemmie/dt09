@@ -3,7 +3,6 @@ package dt09;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Hashtable;
 
 /**
@@ -73,8 +72,8 @@ public class DT09 {
         }
     }
     
-    public StringNScore findHighestWord(int cat){
-        StringNScore stringNScore;
+    public Puzzle findHighestWord(int cat){
+        Puzzle puzzle;
         Hashtable<String, Integer> scores = new Hashtable<String, Integer>();
         String highestWord = "";
         ArrayList<String> nineLetterWords = new ArrayList<String>();
@@ -109,14 +108,14 @@ public class DT09 {
             }
         }
 
-        stringNScore = new StringNScore(highestWord, scores.get(highestWord), cat);
+        puzzle = new Puzzle(highestWord, scores.get(highestWord), cat);
         
-        return stringNScore;
+        return puzzle;
     }
     
-    public StringNScore findHighestOverall(){
-        ArrayList<StringNScore> highestWords = new ArrayList<StringNScore>();
-        StringNScore highestScore;
+    public Puzzle findHighestOverall(){
+        ArrayList<Puzzle> highestWords = new ArrayList<Puzzle>();
+        Puzzle highestScore;
         int i = 0;
 
         for(ArrayList<String> cat : letterCats){
@@ -126,9 +125,9 @@ public class DT09 {
         }
 
         highestScore = highestWords.get(0);
-        for(StringNScore stringNScore : highestWords){
-            if(stringNScore.getScore() > highestScore.getScore()){
-                highestScore = stringNScore;
+        for(Puzzle puzzle : highestWords){
+            if(puzzle.getScore() > highestScore.getScore()){
+                highestScore = puzzle;
             }
         }
         
@@ -166,13 +165,54 @@ public class DT09 {
     public ArrayList<String> getAllNineLetter(){
         return getNineLetterWords(words);
     }
+
+    public ArrayList<Puzzle> compareToCats(ArrayList<String> wordList){
+        Puzzle highest;
+        Puzzle lowest;
+        ArrayList<Puzzle> puzzles = new ArrayList<Puzzle>();
+        int theCat = 0;
+        int count;
+        Puzzle temp = new Puzzle(wordList.get(0), countSubstrings(letterCats.get(0), wordList.get(0)), 0);
+        highest = temp;
+        lowest = temp;
+
+        for(ArrayList<String> cat : letterCats){
+            System.out.println("Testing category: " + theCat);
+            for(String word : wordList){
+                count = countSubstrings(cat, word);
+                temp = new Puzzle(word, count, theCat);
+                if(count > highest.getScore()){
+                    highest = temp;
+                }
+                if(count < lowest.getScore()){
+                    lowest = temp;
+                }
+            }
+            theCat++;
+        }
+
+        puzzles.add(highest);
+        puzzles.add(lowest);
+
+        return puzzles;
+    }
+    
+    public int countSubstrings(ArrayList<String> cat, String word){
+        int count = 0;
+        for(String substring : cat){
+            if(wordContains(word, substring)){
+                count++;
+            }
+        }
+        return count;
+    }
     
     public static void main(String[] args){
         DT09 dt09 = new DT09();
         long startTime = System.currentTimeMillis();
         long endTime;
         long time;
-        StringNScore highest;
+        ArrayList<Puzzle> puzzles;
         ArrayList<String> nineLetters;
 
         System.out.println("Starting rearrange");
@@ -180,7 +220,10 @@ public class DT09 {
         System.out.println("Compulsory categorising");
         dt09.handleCompulsoryLetter();
         nineLetters = dt09.getAllNineLetter();
-        
+        System.out.println("Size of nineLetters: " + nineLetters.size());
+        puzzles = dt09.compareToCats(nineLetters);
+        System.out.println("Highest: " + puzzles.get(0).getString() + " letter: " + puzzles.get(0).getCat());
+        System.out.println("Lowest: " + puzzles.get(1).getString() + " letter: " + puzzles.get(1).getCat());
         endTime = System.currentTimeMillis();
         time = endTime - startTime;
 
