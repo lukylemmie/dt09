@@ -9,10 +9,9 @@ package dt09;
  */
 public class TestWordContains {
     public static void main(String[] args){
-        DT09 dt09 = new DT09();
         
-        System.out.println(dt09.wordContains("aalltb", "altb"));
-        System.out.println(dt09.wordContains("aalltb", "altbsd"));
-        System.out.println(dt09.wordContains("sdfasdf", "ff"));
+        System.out.println(DT09.staticWordContains("aabbccddeef", "aaccee"));
+        System.out.println(DT09.staticWordContains("aabbccddeef", "aaddee"));
+        System.out.println(DT09.staticWordContains("aaddeeffiij", "aabb"));
     }
 }
