@@ -55,6 +55,8 @@ public class DT09v2 {
         numbersInCats = putIntoCats(numbers);
         ninesInCats = putIntoCats(nineLetterNumbers);
 
+        int[] hack = {4, 16};
+
         for(int i = 0; i < ALPHA_COUNT; i++){
             System.out.println("Processing cat: " + i);
             puzzles = findSet(numbersInCats.get(i), ninesInCats.get(i), i);
