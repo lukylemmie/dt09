@@ -291,8 +291,8 @@ public class DT09 {
         int count = 0;
         ArrayList<ArrayList<String>> allWordsInCats = null;
         ArrayList<ArrayList<String>> nineWordsInCats = null;
-        Puzzle highest = null;
         Puzzle temp = null;
+        Puzzle highest = null;
         Puzzle highest2 = null;
         Puzzle highest3 = null;
         Puzzle lowest = null;
