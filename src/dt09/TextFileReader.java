@@ -56,6 +56,9 @@ public class TextFileReader {
         while((line = bufferedReader.readLine()) != null){
             line = rearrangeLetters(line);
             index = Collections.binarySearch(sortedLines, line);
+            if(index < 0){
+                index = -(index + 1);
+            }
             sortedLines.add(index, line);
         }
 

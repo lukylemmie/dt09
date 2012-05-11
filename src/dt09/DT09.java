@@ -212,13 +212,14 @@ public class DT09 {
     }
     
     public static void main(String[] args){
-        DT09 dt09 = new DT09();
+        DT09 dt09 = null;
         long startTime = System.currentTimeMillis();
         long endTime;
         long time;
         ArrayList<String> wordList = null;
         ArrayList<Puzzle> puzzles;
         ArrayList<String> nineLetters;
+        int count = 0;
 
         System.out.println("Get + rearrange + sort wordList");
         try {
@@ -226,18 +227,22 @@ public class DT09 {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+        for(String word : wordList){
+            System.out.println(count + ": " +word);
+            count++;
+        }
 //        System.out.println("Starting rearrange");
 //        dt09.rearrangeLetters();
-        if(wordList != null){
-            dt09 = new DT09(wordList);
-        }
-        System.out.println("Compulsory categorising");
-        dt09.handleCompulsoryLetter();
-        nineLetters = dt09.getAllNineLetter();
-        System.out.println("Size of nineLetters: " + nineLetters.size());
-        puzzles = dt09.compareToCats(nineLetters);
-        System.out.println("Highest: " + puzzles.get(0).getString() + " letter: " + puzzles.get(0).getCat());
-        System.out.println("Lowest: " + puzzles.get(1).getString() + " letter: " + puzzles.get(1).getCat());
+//        if(wordList != null){
+//            dt09 = new DT09(wordList);
+//        }
+//        System.out.println("Compulsory categorising");
+//        dt09.handleCompulsoryLetter();
+//        nineLetters = dt09.getAllNineLetter();
+//        System.out.println("Size of nineLetters: " + nineLetters.size());
+//        puzzles = dt09.compareToCats(nineLetters);
+//        System.out.println("Highest: " + puzzles.get(0).getString() + " letter: " + puzzles.get(0).getCat());
+//        System.out.println("Lowest: " + puzzles.get(1).getString() + " letter: " + puzzles.get(1).getCat());
         endTime = System.currentTimeMillis();
         time = endTime - startTime;
 
